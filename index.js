@@ -20,6 +20,16 @@ function donnerABoire() {
     state.drink += 25;
 }
 
+function soigner() {
+    state.life += 25;
+}
+
+function tuer() {
+    state.life = -0
+    state.drink = -0
+    state.eat = -0
+}
+
 process.stdin.on("keypress", (character, key) => {
     if (key.name === "up") {
         donnerAManger();
@@ -30,6 +40,20 @@ process.stdin.on("keypress", (character, key) => {
 process.stdin.on("keypress", (character, key) => {
     if (key.name === "down") {
         donnerABoire();
+        return;
+    }
+});
+
+process.stdin.on("keypress", (character, key) => {
+    if (key.name === "left") {
+        soigner();
+        return;
+    }
+});
+
+process.stdin.on("keypress", (character, key) => {
+    if (key.name === "right") {
+        tuer();
         return;
     }
 });
@@ -45,7 +69,7 @@ const state = {
     life: 100,
     drink: 100,
     eat: 100,
-    time: 0, //temps en seconde
+    time: 0,
 };
 
 function getOurs() {
@@ -92,7 +116,7 @@ function getEatBar() {
 }
 
 setInterval(function () {
-    const espace = [getOurs(), "🍗 = UP 🍺 = DOWN", getLifeBar(), getDrinkBar(), getEatBar()];
+    const espace = [getOurs(), "🍗 = UP / 🍺 = DOWN / 💉 = LEFT / 💀 = RIGHT", getLifeBar(), getDrinkBar(), getEatBar()];
 
     logUpdate(espace.join("\n"));
 }, 750);
@@ -102,7 +126,7 @@ setInterval(function () {
     state.time += 1;
 
     if (state.time % 3 === 0) {
-        if (state.eat === 0 && state.drink === 0) {
+        if (state.eat === 0 && state.drink === 0 && state.life > 0) {
             state.life--;
         }
     }

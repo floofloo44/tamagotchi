@@ -35,23 +35,17 @@ process.stdin.on("keypress", (character, key) => {
         donnerAManger();
         return;
     }
-});
 
-process.stdin.on("keypress", (character, key) => {
     if (key.name === "down") {
         donnerABoire();
         return;
     }
-});
 
-process.stdin.on("keypress", (character, key) => {
     if (key.name === "left") {
         soigner();
         return;
     }
-});
 
-process.stdin.on("keypress", (character, key) => {
     if (key.name === "right") {
         tuer();
         return;
